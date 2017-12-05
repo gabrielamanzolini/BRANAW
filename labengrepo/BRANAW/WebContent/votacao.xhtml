@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:b="http://bootsfaces.net/ui"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://java.sun.com/jsf/core">
+	<h:head>
+		<meta charset="utf-8"/>
+		<title>BRANAW-Votação</title>
+		<h:outputStylesheet library="css" name="styles.css"/>
+	</h:head>
+	<h:body style="padding-top: 50px; padding-bottom: 20px;">
+		<b:navBar brand="BRANAW" brandHref="home.xhtml" inverse="true" fixed="top">
+              <b:navbarLinks>
+                  <b:navLink class="active" value="Votar" href="#"></b:navLink>
+                  <b:navLink value="Cadastro do Candidato" href="candidato.xhtml"></b:navLink>
+                  <b:navLink value="Apuração" href="apuracao.xhtml"></b:navLink>
+              </b:navbarLinks>
+          </b:navBar>
+          <b:container>
+          	  <h:form>
+				  <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+			  </h:form>
+          </b:container>
+          <b:container>
+          	<br/>
+          	<h:form id="form">
+	          	<p:carousel value="#{votoMB.candidatos}" headerText="Lista de Candidatos" var="candidato" 
+	          		itemStyle="text-align:none" responsive="true">
+	          		<p:panelGrid columns="2" style="width:100%; margin: 10px 0px"
+	          		  	columnClasses="value" layout="grid" styleClass="ui-panelgrid-blank">
+	          		  	<p:panelGrid columns="1">
+	          		  		<h:outputText value="Candidato"/>
+	          		  		<f:facet name="header">
+		          				<p:graphicImage id="image" cache="false" value="#{imagesView.imagem}" weight="150" height="100">
+										<f:param name="candidatoId" value="#{candidato.id}"/>
+								</p:graphicImage>
+							</f:facet>
+								<p:panelGrid columns="2">
+									<h:outputText value="Nome:"/>
+				          			<h:outputText value="#{candidato.nome}"/>
+				          			<h:outputText value="Partido:"/>
+				          			<h:outputText value="#{candidato.partido}"/>
+			          			</p:panelGrid>
+	          		  	</p:panelGrid>
+	          		  	<p:panelGrid columns="1">
+          		  			<h:outputText value="Vice Candidato"/>
+		          		  	<f:facet name="header">
+		          		  		<p:graphicImage id="imageVice" cache="false" value="#{imagesView.imagemVice}" weight="150" height="100">
+										<f:param name="candidatoId" value="#{candidato.id}"/>
+								</p:graphicImage>
+		          			</f:facet>
+		          				<p:panelGrid columns="2">
+		          				<h:outputText value="Nome:"/>
+			          			<h:outputText value="#{candidato.vice}"/>
+			          			<h:outputText value="Partido:"/>
+			          			<h:outputText value="#{candidato.partidoVice}"/>
+		          				</p:panelGrid>
+	          		  	</p:panelGrid>
+	          			<b:container>
+          					<p:panelGrid columns="2">
+		          				<b:commandButton update=":form:propostaDetail" value="Proposta" look="primary" oncomplete="PF('propostaDialog').show()" >
+		                    		<f:setPropertyActionListener value="#{candidato}" target="#{votoMB.selectedCandidato}" />
+			                	</b:commandButton>
+			                	
+			          			<b:commandButton update=":form2:votoPanel" value="Votar" look="success" oncomplete="PF('votarDialog').show()">
+			          				<f:setPropertyActionListener value="#{candidato}" target="#{votoMB.voto.candidatoEscolhido}"/>
+			          			</b:commandButton>  
+          					</p:panelGrid>
+	          			</b:container>
+	          		</p:panelGrid>
+	          		
+	          		<f:facet name="footer">
+						©2017                	             	
+	            	</f:facet>
+	          		
+	          	</p:carousel>
+	          	
+	          	<p:dialog header="Proposta" widgetVar="propostaDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+	        		<p:outputPanel id="propostaDetail" style="text-align:center;">
+	            		<p:panelGrid  columns="1" rendered="#{not empty votoMB.selectedCandidato}">
+	               			 <f:facet name="header">
+	                    		 <p:graphicImage id="imageC2" cache="false" value="#{imagesView.imagem}" weight="250" height="200">
+										<f:param name="candidatoId" value="#{votoMB.selectedCandidato.id}"/>
+								 </p:graphicImage>
+	                		 </f:facet>
+	                		 <h:outputText value="#{votoMB.selectedCandidato.proposta}" /> 
+	            	</p:panelGrid>
+	        	  </p:outputPanel>
+	    		</p:dialog>
+	     	</h:form>     	
+	     	
+	     	<h:form id="form2">
+	     		<p:dialog header="Confirmar Voto" widgetVar="votarDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" focus="nome">
+	    			<p:outputPanel id="votoPanel" style="text-align:center;">
+	    				<p:panelGrid columns="2" rendered="#{not empty votoMB.voto.candidatoEscolhido}" columnClasses="value">
+	    					<f:facet name="header">
+	    						<h:outputText value="#{votoMB.voto.candidatoEscolhido.nome} - #{votoMB.voto.candidatoEscolhido.partido}"/>
+	    					</f:facet>
+	    					
+	    					<h:outputText value="Nome do Eleitor: "/>
+	    					<h:inputText id="nome" required="true" value="#{votoMB.voto.nomeEleitor}" />
+	    					
+	    					<h:outputText value="CPF do Eleitor: "/>
+	    					<h:inputText required="true" value="#{votoMB.voto.cpfEleitor}"/>
+	    					
+	    					<h:outputText value="Estado:"/>
+	    					<b:selectOneMenu value="#{votoMB.estadoSelecionado}">
+	    						<f:selectItems value="#{votoMB.estados}"/>
+	    					</b:selectOneMenu>
+	    						    					
+    						<p:commandButton value="Confirmar" id="ajax" actionListener="#{votoMB.votar}" styleClass="ui-priority-primary" 
+    							oncomplete="PF('votarDialog').hide()" />
+	    						
+	    				</p:panelGrid>
+	    			</p:outputPanel>
+	    		
+	    		</p:dialog>
+	     	</h:form>
+	     </b:container>
+	</h:body>
+</html>

@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>BRANAW-Home</title>
+	<meta name="author" content="Branaw Team"></meta>
+	<h:outputStylesheet library="css" name="styles.css" />
+</h:head>
+<h:body style="padding-top: 50px; padding-bottom: 20px;">
+	<b:navBar brand="BRANAW" brandHref="home.xhtml" inverse="true"
+		fixed="top">
+		<b:navbarLinks>
+			<b:navLink value="Votar" href="votacao.xhtml"></b:navLink>
+			<b:navLink value="Cadastro do Candidato" href="candidato.xhtml"></b:navLink>
+			<b:navLink value="Apuração" href="apuracao.xhtml"></b:navLink>
+		</b:navbarLinks>
+	</b:navBar>
+	<b:jumbotron style="background-image: url('resources/images/br.jpg')">
+		<b:container>
+			<h1 id="title">Brasil Na Web</h1>
+			<h4 id="slogan">A forma fácil de mudar o país!</h4>
+		</b:container>
+		
+	</b:jumbotron>
+	
+	<b:container align="center">
+		<b:panelGrid columns="3">
+			<b:panel style="text-align:center;">
+				<b:iconAwesome name="fa-rebel" size="5x" />
+			 	<b:iconAwesome name="fa-empire" size="5x" />
+				<h3 id="left">Vote nos candidatos que confia.</h3>
+			</b:panel>
+			<b:panel style="text-align:center;">
+				<iframe width="300" height="68" src="https://www.youtube.com/watch?v=FzVR_fymZw4" frameborder="0" allowfullscreen="true"></iframe>
+				<h3 id="left">Já que o site não está tão bom, fiquem com esse vídeo</h3>
+			</b:panel>
+			<b:panel style="text-align:center;">
+				<b:iconAwesome name="fa-bar-chart" size="5x" />
+				<h3 id="right">Monitore o status das eleições.</h3>
+			</b:panel>
+		</b:panelGrid>
+		<br/>
+	</b:container>
+	
+	<b:container>
+		<b:carousel id="tiovivo" interval="3000">
+			<b:carouselItem>
+				<p:graphicImage cache="false" class="images" library="images"
+					name="gitsp.png" width="125%" height="100%" />
+				<b:carouselCaption>
+					<h3>Nosso projeto no GitHub!</h3>
+					<p>
+						 <a style="color: #fff" href="https://github.com/DenysWyll/LabEngProjects.git" >Clique aqui</a>
+					</p>
+				</b:carouselCaption>
+			</b:carouselItem>
+			<b:carouselItem>
+				<p:graphicImage cache="false" class="images" library="images"
+					name="javapr.png" width="125%" height="100%" />
+				<b:carouselCaption>
+					<h3>Todo o poder do Java!</h3>
+					<p>
+						<a style="color: #fff" href="https://www.oracle.com/br/java/index.html">Clique aqui</a>
+					</p>
+				</b:carouselCaption>
+			</b:carouselItem>
+			<b:carouselItem>
+				<p:graphicImage cache="false" class="images" library="images"
+					name="primerj.png" width="125%" height="100%" />
+				<b:carouselCaption>
+					<h3>A praticidade do Primefaces!</h3>
+					<p>
+						<a style="color: #fff" href="https://www.primefaces.org/">Clique aqui</a>
+					</p>
+				</b:carouselCaption>
+			</b:carouselItem>
+			<b:carouselItem>
+				<p:graphicImage cache="false" class="images" library="images"
+					name="rshibernate.png" width="125%" height="100%" />
+				<b:carouselCaption>
+					<h3>Persistencia inteligente com Hibernate!</h3>
+					<p>
+						 <a style="color: #fff" href="http://hibernate.org/">Clique aqui</a>
+					</p>
+				</b:carouselCaption>
+			</b:carouselItem>
+			<b:carouselItem>
+				<p:graphicImage cache="false" class="images" library="images"
+					name="bootfacesBa.png" width="125%" height="100%" />
+				<b:carouselCaption>
+					<h3>A Responsividade do Bootfaces!</h3>
+					<p>
+						<a style="color: #fff" href="https://www.bootsfaces.net/">Clique aqui</a>
+					</p>
+				</b:carouselCaption>
+			</b:carouselItem>
+		</b:carousel>
+
+	</b:container>
+	
+	<b:container>
+		<hr />
+		<footer>
+			<p>©2017</p>
+		</footer>
+	</b:container>
+
+</h:body>
+</html>

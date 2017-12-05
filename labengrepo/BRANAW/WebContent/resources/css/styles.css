@@ -1,0 +1,25 @@
+@CHARSET "ISO-8859-1";
+
+#title {
+	color: #e1e1e3;
+}
+
+#slogan {
+	color: #ffffff;
+}
+
+navlink #home {
+	font: Georgia bold;
+}
+
+#votos{
+	font-size: 50em;
+}
+
+label{
+	font-size: 50px;
+}
+
+#left, #right{
+	text-align: center;
+}

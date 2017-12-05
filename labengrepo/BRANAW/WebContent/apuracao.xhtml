@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>BRANAW-Apuracao</title>
+	<meta name="author" content="Branaw Team"></meta>
+	<h:outputStylesheet library="css" name="styles.css" />
+</h:head>
+<h:body style="padding-top: 50px; padding-bottom: 20px;">
+	<b:navBar brand="BRANAW" brandHref="home.xhtml" inverse="true"
+		fixed="top">
+		<b:navbarLinks>
+			<b:navLink value="Votar" href="votacao.xhtml"></b:navLink>
+			<b:navLink value="Cadastro do Candidato" href="candidato.xhtml"></b:navLink>
+			<b:navLink class="active" value="Apuração" href="#"></b:navLink>
+		</b:navbarLinks>
+	</b:navBar>
+
+	<b:container>
+		<br />
+		<b:row>
+			<!-- RANKING -->
+			<b:column col-md="6">
+				<h:form>
+					<p:dataScroller value="#{apuracaoController.candidatos}"
+						var="candidato" chunkSize="5">
+						<f:facet name="header">
+            				Apuração das eleições
+        				</f:facet>
+
+						<f:facet name="loader">
+							<p:commandButton type="button" value="More"
+								icon="ui-icon-circle-triangle-s" />
+						</f:facet>
+						<b:panel>
+							<p:outputPanel>
+								<h:panelGrid columns="3">
+									<b:column>
+										<p:graphicImage cache="false" value="#{imagesView.imagem}"
+											weight="150" height="75">
+											<f:param name="candidatoId" value="#{candidato.id}" />
+										</p:graphicImage>
+									</b:column>
+									<b:column>
+										<h:outputText value="Candidato: " />
+										<h:outputText value="#{candidato.nome}"
+											style="font-weight: bold" />
+										<br />
+										<h:outputText value="Partido: " />
+										<h:outputText value="#{candidato.partido}"
+											style="font-weight: bold" />
+									</b:column>
+									<b:column>
+										<h:outputText id="votos" update="refresh"
+											value="#{candidato.votos}"
+											style="font-weight: bold; font-size: 60px" />
+										<h:outputText value=" votos" />
+									</b:column>
+
+									<b:column>
+										<p:graphicImage cache="false" value="#{imagesView.imagemVice}"
+											weight="150" height="75">
+											<f:param name="candidatoId" value="#{candidato.id}" />
+										</p:graphicImage>
+									</b:column>
+									<b:column>
+										<h:outputText value="Vice: " />
+										<h:outputText value="#{candidato.vice}"
+											style="font-weight: bold" />
+										<br />
+										<h:outputText value="Partido: " />
+										<h:outputText value="#{candidato.partidoVice}"
+											style="font-weight: bold" />
+									</b:column>
+								</h:panelGrid>
+							</p:outputPanel>
+						</b:panel>
+					</p:dataScroller>
+				</h:form>
+			</b:column>
+			<!-- GRAFICOS -->
+			<b:column col-md="6">
+				<b:panel>
+					<p:chart type="pie" model="#{apuracaoController.pieModel2}"
+						style="width:400px;height:300px;" />
+				</b:panel>
+				<b:panel>
+					<p:chart type="bar" model="#{apuracaoController.barModel}"
+						style="width:400px;height:300px" />
+				</b:panel>
+			</b:column>
+		</b:row>
+	</b:container>
+	<b:container>
+		<footer>
+		<p>©2017</p>
+		</footer>
+	</b:container>
+</h:body>
+</html>
